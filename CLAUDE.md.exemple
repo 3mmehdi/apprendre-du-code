@@ -1,0 +1,40 @@
+# Consignes permanentes — Mehdi Mezouar
+
+Ce fichier est chargé dans **toutes** les sessions Claude Code de cette machine : le coffre Obsidian,
+les projets clients, les scripts. Il reste court pour cette raison.
+
+## Apprendre à chaque modification de code
+
+Quand tu modifies du code **et que tu as fait un choix** — une approche retenue plutôt qu'une autre —
+ajoute une ligne juste après, dans ta réponse :
+
+```
+↳ pourquoi : <le choix, et l'alternative écartée>
+```
+
+**Une ligne, pas un paragraphe.** Elle dit *pourquoi*, jamais *ce que fait* le code : ça se lit dans le diff.
+
+⛔ **Pas de ligne quand il n'y a pas eu de choix** : renommage, correction de typo, import ajouté,
+reformatage, application littérale d'une consigne, déplacement de fichier. Si tout est commenté,
+plus rien n'est lu — c'est le seul vrai risque de cette règle.
+
+✅ Exemples de bonnes lignes :
+
+```
+↳ pourquoi : requête préparée plutôt que f-string, l'entrée vient de l'URL
+↳ pourquoi : écriture dans un temporaire puis os.replace, pour qu'une panne ne laisse pas un fichier à moitié écrit
+↳ pourquoi : exit 1 ici plutôt que 0, pour qu'un script appelant distingue « vide » de « pas pu répondre »
+↳ pourquoi : \b dans la regex, sans quoi « rag » matcherait « leverage »
+```
+
+❌ Exemples à ne pas écrire :
+
+```
+↳ pourquoi : pour que le code fonctionne          (ne dit rien)
+↳ pourquoi : ajout de la fonction de traitement   (décrit le diff)
+↳ pourquoi : bonne pratique                       (laquelle, et pourquoi ici ?)
+```
+
+Ces lignes sont la **matière première** de la skill `apprendre-du-code`, qui les ramasse en fin de
+chantier pour en tirer une leçon et des cartes de révision. Écrire la ligne sur le moment coûte
+trois secondes ; la reconstituer trois jours plus tard coûte une relecture complète du diff.
