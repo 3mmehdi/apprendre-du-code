@@ -25,9 +25,37 @@ de `~/.claude/CLAUDE.md`.
   de [[wiki/cours/ia/Workflow d'apprentissage — Parcours IA]]
 - **Inventer une leçon quand il n'y en a pas** — voir l'étape 0
 
+## Mode entraînement — quand il n'y a pas de chantier derrière
+
+Demandé par Mehdi le 2026-10-13 : *« tu me poses des problèmes, je réponds et on regarde si j'ai bon,
+et on en sort des fiches »*, sur son code **et** sur des exercices écrits pour l'occasion.
+
+Déclencheurs : « entraîne-moi sur Python », « pose-moi des problèmes », « exercice du jour ».
+
+**Ce qui change** : l'étape 0 ne s'applique pas (aucun diff à juger) et l'étape 1 est remplacée par le
+choix de la matière, dans cet ordre de préférence :
+
+| Source | Quand la préférer |
+|---|---|
+| **Son propre code de production** (scripts, agents planifiés) | Par défaut. Il l'a écrit, les conséquences sont réelles, et c'est le format d'une épreuve technique courante : relire du Python, sans IA |
+| **Un bug déjà vécu**, retrouvé dans `wiki/cours/dev/` ou `wiki/log.md` | Pour vérifier qu'une leçon ancienne tient encore. Si elle ne tient pas, c'est le signal de l'étape 7 |
+| **Un exercice écrit sur mesure** | Quand aucun code à lui ne couvre la notion visée. Écrire du code **plausible**, pas un exercice d'école : une fonction qu'une vraie veille ou un vrai script d'ingestion contiendrait |
+
+⛔ **Jamais les Problem Sets de CS50P** : le cours interdit l'IA dessus (seul le CS50 Duck est
+autorisé), et le certificat saute. Les deux pistes ne se
+croisent pas : CS50P apprend à **écrire** du Python, ce mode entraîne à en **relire**.
+
+**Tout le reste est inchangé** : une question à la fois (étape 2), classement sans complaisance
+(étape 3), explication même sur un ✅ (étape 4), rangement par thème (étape 5), cartes sur les ⚠️ et
+❌ uniquement (étape 6), et la règle de la troisième fois (étape 7).
+
+⚠️ **Le piège propre à ce mode** : sans diff pour borner le sujet, on dérive vers le quiz de
+définitions. La question doit toujours porter sur **ce qui casse** et **pourquoi**, jamais sur ce
+qu'une syntaxe veut dire.
+
 ## Étape 0 — Est-ce qu'il y a seulement quelque chose à apprendre ?
 
-Avant tout, regarder ce qui a bougé. **S'il n'y a pas eu de choix technique**, s'arrêter et le dire :
+⏭ **Sautée en mode entraînement.** Avant tout, regarder ce qui a bougé. **S'il n'y a pas eu de choix technique**, s'arrêter et le dire :
 
 > « Rien à en tirer cette fois : trois renommages et une chaîne corrigée, aucun choix technique.
 > Je ne fabrique pas une leçon là où il n'y en a pas. »
@@ -122,7 +150,7 @@ n'existe pas, avec le frontmatter du coffre (`type: cours`, `created`, `updated`
 Si la leçon relève de plusieurs thèmes, choisir **celui où Mehdi la chercherait**, et poser un
 wikilink depuis l'autre. Jamais deux copies.
 
-`$VAULT` = `$VAULT` — à utiliser en chemin absolu, la skill
+`$VAULT` = le chemin absolu de votre coffre — à utiliser en chemin absolu, la skill
 tourne aussi depuis les projets clients.
 
 ## Étape 6 — Les cartes Anki, **seulement sur les ⚠️ et ❌**
@@ -134,7 +162,7 @@ Format exact (plomberie existante, à ne pas réinventer) :
 
 ```
 TARGET DECK
-Code 2026
+Formation IA::Shell
 
 START
 Basic
@@ -146,9 +174,8 @@ END
 
 - `START` / `END` **sans crochets**. Avec crochets, le plugin ignore la carte en silence :
   **77 cartes perdues** avant le correctif du 2026-07-06.
-- `TARGET DECK` en tête de page. ⚠️ **À confirmer au premier scan** : aucun paquet n'est associé aux
-  dossiers dans la configuration du plugin.
-- Paquet **`Code 2026`**, distinct de `Formation IA 2026`.
+- `TARGET DECK` en tête de page (**sans crochets**), et **jamais de `<…>` dans une carte** : Anki les lit comme des balises HTML et les efface. Après le scan, vérifier que chaque carte a reçu sa ligne `<!--ID: …-->` ; sinon elle n'est pas dans Anki (le plugin ne réessaie jamais une page déjà enregistrée). ⛔ **Fins de ligne `\n` obligatoires** : le plugin ne reconnaît aucune carte dans une page en `\r\n`. Sous Windows, écrire par script avec `open(p, 'w', encoding='utf-8', newline='')`, jamais un `open(p, 'w')` nu ; ou passer par l'outil Edit.
+- Paquet : **`Formation IA::Python`** pour une leçon tirée de code Python, **`Formation IA::Shell`** pour une leçon tirée de bash / shell (règle de Mehdi, 2026-10-03 : le paquet suit le **langage** de la leçon). `TARGET DECK` vaut pour toute la page : une page de thème prend le langage de ses cartes ; si un thème mélange les deux, séparer en deux pages (`<thème> (Python)`, `<thème> (shell)`) plutôt que de mal ranger des cartes. ⚠️ Sans `TARGET DECK`, les cartes tombent dans le paquet par défaut du plugin (`Anglais 2026::Sessions`).
 - ⛔ **Jamais en carte** : prix, numéros de version, noms de modèles, dates. On garde les **concepts**
   et les **raisons** — le reste périme et fait réviser du faux.
 - **Une carte = une idée**, formulée comme une question qu'un recruteur pourrait poser.

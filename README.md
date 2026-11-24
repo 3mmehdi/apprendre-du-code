@@ -96,3 +96,8 @@ l'agent de dériver pendant qu'il travaille. Celui-ci s'occupe de ce qu'on en re
 ## Licence
 
 MIT. Voir [LICENSE](LICENSE).
+
+## Mises à jour
+
+- **24/11/2026** : mode entraînement (exercices sur son propre code quand il n'y a pas de chantier derrière). Règles Anki précisées : paquet selon le langage de la leçon, fins de ligne `
+` obligatoires, vérification des identifiants après le scan.
